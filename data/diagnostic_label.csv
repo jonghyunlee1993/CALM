@@ -1,0 +1,16 @@
+﻿project,low_risk,intermediate_risk,high_risk
+STAD,Stomach adenocarcinoma with lower risk, Stomach adenocarcinoma with intermediate risk, Stomach adenocarcinoma with higher risk
+BRCA,Breast invasive carcinoma with lower risk, Breast invasive carcinoma with intermediate risk, Breast invasive carcinoma with higher risk
+BLCA,Bladder urothelial carcinoma with lower risk, Bladder urothelial carcinoma with intermediate risk, Bladder urothelial carcinoma with higher risk
+COADREAD,Colon and rectum adenocarcinoma with lower risk, Colon and rectum adenocarcinoma with intermediate risk, Colon and rectum adenocarcinoma with higher risk
+HNSC,Head and neck squamous cell carcinoma with lower risk, Head and neck squamous cell carcinoma with intermediate risk, Head and neck squamous cell carcinoma with higher risk
+KIRC,Kidney renal clear cell carcinoma with lower risk, Kidney renal clear cell carcinoma with intermediate risk, Kidney renal clear cell carcinoma with higher risk
+KIRP,Kidney renal papillary cell carcinoma with lower risk, Kidney renal papillary cell carcinoma with intermediate risk, Kidney renal papillary cell carcinoma with higher risk
+LUAD,Lung adenocarcinoma with lower risk, Lung adenocarcinoma with intermediate risk, Lung adenocarcinoma with higher risk
+LUSC,Lung squamous cell carcinoma with lower risk, Lung squamous cell carcinoma with intermediate risk, Lung squamous cell carcinoma with higher risk
+LIHC,Liver hepatocellular carcinoma with lower risk, Liver hepatocellular carcinoma with intermediate risk, Liver hepatocellular carcinoma with higher risk
+PAAD,Pancreatic adenocarcinoma with lower risk, Pancreatic adenocarcinoma with intermediate risk, Pancreatic adenocarcinoma with higher risk
+READ,Rectum adenocarcinoma with lower risk, Rectum adenocarcinoma with intermediate risk, Rectum adenocarcinoma with higher risk
+SKCM,Skin cutaneous melanoma with lower risk, Skin cutaneous melanoma with intermediate risk, Skin cutaneous melanoma with higher risk
+UCEC,Uterine corpus endometrial carcinoma with lower risk, Uterine corpus endometrial carcinoma with intermediate risk, Uterine corpus endometrial carcinoma with higher risk
+GBMLGG,Glioblastoma and lower-grade glioma with lower risk, Glioblastoma and lower-grade glioma with intermediate risk, Glioblastoma and lower-grade glioma with higher risk

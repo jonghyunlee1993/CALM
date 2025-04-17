@@ -1,0 +1,27 @@
+# CALM Model Configuration
+
+project_path: "/project/kimlab_tcga/JH_workspace/multimodality_prognosis_prediction/CALM/"
+
+dataset:
+    target_project: "STAD"
+    meta_data_path: "/project/kimlab_tcga/JH_workspace/multimodality_prognosis_prediction/CALM/data/OS/tcga_stad_all.csv"
+    split_path: "/project/kimlab_tcga/JH_workspace/multimodality_prognosis_prediction/CALM/splits/OS/tcga_stad/"
+    wsi_path: "/project/kimlab_tcga/TCGA_raw_image_data/tcga-stad/"
+    wsi_file_ext: ".svs"
+    image_feat_path: "/project/kimlab_tcga/Data/extracted_features/CLAM_prepared_UNI/tcga-stad"
+    text_feat_path: "/project/kimlab_tcga/JH_workspace/multimodality_prognosis_prediction/CALM/data/TCGA_Reports_prepared.csv"
+    omic_feat_path: 
+    valid_size: 0.2
+    random_state: 42
+
+hyperparam:
+    warmup_epochs: 10
+    max_epochs: 100
+    learning_rate: 1e-5
+
+trainer_param:
+    precision: 16
+    gpus: 1
+    accelerator: 'cuda'
+    accumulate_grad_batches: 8
+    num_sanity_val_steps: 0
