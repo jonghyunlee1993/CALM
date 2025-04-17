@@ -1,9 +1,10 @@
 # CALM <img src="CALM_thumbnail.png" width="150px" align="right" />
+&nbsp;**C**linically **A**ligned model **L**everaging **M**ulti-modality
+&nbsp; 
+&nbsp;
 
 ## Overview of CALM
-
-
-**C**linically **A**ligned model **L**everaging **M**ulti-modality (**CALM**) is a vision-language prognosis (overall survival; OS) prediction model that leveraging paired WSIs and corresponding free-text pathology reports. Unlike datasets designed for academic research, such as WSI-omics pairs, WSI-pathology report pairs are routinely collected in clinical environments, making CALM more aligned with real-world clinical workflows. 
+**CALM** is a vision-language prognosis (overall survival; OS) prediction model that leveraging paired WSIs and corresponding free-text pathology reports. Unlike datasets designed for academic research, such as WSI-omics pairs, WSI-pathology report pairs are routinely collected in clinical environments, making CALM more aligned with real-world clinical workflows. 
 ![overview](figure_overview.png)
 
 ## Abstract
