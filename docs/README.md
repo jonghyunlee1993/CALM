@@ -8,9 +8,15 @@
 ![overview](figure_overview.png)
 
 ## Abstract
-Prognosis prediction using hematoxylin and eosin (H&E)-stained  whole slide images (WSIs) has seen significant progress, particularly through the integration of omics data. However, omics profiles are not routinely collected in clinical workflows, limiting real-world applicability. In contrast, pathology reports are generated as part of standard diagnostic assessment. These reports contain expert interpretations of WSIs and often incorporate clinical insight, making them a widely available but underutilized resource in computational modeling. Their use in multi-modal prognostic models has been limited due to challenges related to unstructured text formats and variability in report length.
+Recent multimodal models combining WSIs and omics data have improved cancer prognosis prediction.  
+However, omics profiles are not routinely available in clinical workflows. In contrast, pathology reports are ubiquitous and rich in expert-derived semantic information.
 
-To address these limitations, we propose CALM, a lightweight and clinically grounded model that combines WSIs and pathology reports for pancancer prognosis prediction. CALM leverages pretrained encoders with support for long-context inputs and introduces large language model-generated diagnostic descriptions to guide cross-modal representation learning. Across 14 cancer types, CALM outperforms image-only models and achieves comparable performance to omics-based approaches, despite using only 6.8 million trainable parameters. CALM demonstrates the potential of free-text pathology reports as a scalable and effective modality for clinical prognostic modeling.
+**CALM** addresses this gap by:
+- Using pretrained encoders with long-context support.
+- Introducing **LLM-generated diagnostic descriptions** as semantic anchors.
+- Applying a cross-modal alignment strategy via **knowledge-guided pooling**.
+
+Despite having only **6.8M trainable parameters**, CALM outperforms image-only baselines and achieves **competitive results** compared to omics-based models across **14 cancer types**.
 
 ## Performances
 | Project  | ResNet-50 Image Only    | ResNet-50 Image + Text      | UNI Image Only            | UNI Image + Text            |
@@ -31,13 +37,26 @@ To address these limitations, we propose CALM, a lightweight and clinically grou
 | UCEC     | 0.477 (0.449–0.504)     | **0.608 (0.583–0.633)**     | 0.659 (0.648–0.669)       | **0.661 (0.636–0.685)**     |
 | **Average** | 0.531                | **0.588**                   | 0.610                     | **0.626**                   |
 
-Overall, combining image and text consistently improved performance compared to image-only models. 
-- **CALM (ResNet-50)** achieved a **10.7%** improvement in c-index on average (from 0.531 to 0.588).
-- **CALM (UNI)**, leveraging a pathology-specific image encoder, showed a **2.6%** gain (from 0.610 to 0.626).
-- Performance improved in 12 out of 14 cancer types with ResNet-50 and in 11 out of 14 with UNI when text was added.
+- **+10.7%** gain with ResNet-50 backbone  
+- **+2.6%** gain with UNI backbone  
+- Text integration improved performance in **12/14** (ResNet-50) and **11/14** (UNI) cancer types  
+
+
+## External Validation
+
+We externally validated CALM on an independent head and neck cancer (HNSC) cohort from **Kyung Hee University Medical Center (KHMC)**.  
+CALM achieved a **C-index of 0.6551**, outperforming the image-only baseline (0.6232) by **5.1%**, demonstrating generalizability across populations and clinical settings.
+
 
 ## Diagnostic Description and Knowledge-Guided Pooling
-To improve cross-modal alignment, CALM incorporates **diagnostic descriptions**—LLM-generated textual summaries that capture key morphological and prognostic features specific to each cancer type and risk level (e.g., low, intermediate, high). These descriptions serve as **static semantic anchors** during training and guide the alignment between image and text representations through a **knowledge-guided pooling** mechanism. Unlike simple class labels, diagnostic descriptions offer rich, interpretable context that helps disambiguate redundant or noisy clinical narratives. Empirically, their inclusion consistently improved model performance, highlighting their value in enhancing multi-modal representation learning.
+
+To improve cross-modal alignment, CALM incorporates **LLM-generated diagnostic descriptions** stratified by cancer type and survival risk level (e.g., low/intermediate/high).  
+
+These serve as **static semantic anchors** that guide learning during training:
+
+- Provide richer context than simple class labels
+- Improve interpretability and alignment
+- Boost performance in ablation studies
 
 
 ## Installation & Run
@@ -55,7 +74,18 @@ To run CALM, you first need to extract patch features. Please use the [CLAM tool
 
 After preparing the extracted patch instances, you can train CALM using the following command:
 
-`CUDA_VISIBLE_DEVICES=0 nohup python ./run.py --config config/OS_UNI/config_blca.yaml --results_path results/ABMIL_UNI --num_workers 6 --use_sampler True --image_encoder ABMIL --loss_lambda 0.1 --cont_loss cosine --temperature 1.0 --diagnostic_data data/diagnostic_description.csv > logs/blca_ABMIL_UNI.out &`
+```
+CUDA_VISIBLE_DEVICES=0 nohup python ./run.py \
+  --config config/OS_UNI/config_blca.yaml \
+  --results_path results/ABMIL_UNI \
+  --num_workers 6 \
+  --use_sampler True \
+  --image_encoder ABMIL \
+  --loss_lambda 0.1 \
+  --cont_loss cosine \
+  --temperature 1.0 \
+  --diagnostic_data data/diagnostic_description.csv > logs/blca_ABMIL_UNI.out &
+```
 
 Example execution codes are provided in `run_experiments.sh`.
 
