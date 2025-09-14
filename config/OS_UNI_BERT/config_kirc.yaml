@@ -1,0 +1,36 @@
+# CALM Model Configuration
+
+project_path: "/project/kimlab_tcga/JH_workspace/multimodality_prognosis_prediction/CALM"
+
+# Training parameters
+training:
+    results_path: "results/ABMIL_UNI_BERT"
+    batch_size: 1
+    num_workers: 6
+    use_sampler: True
+    anchor_data: "data/anchor_text/diagnostic_description_long_context.csv"
+    cont_loss: "cosine"
+    loss_lambda: 0.1
+    image_encoder: "uni"  # choices: ["musk", "uni"]
+    text_encoder: "bert"   # choices: ["musk", "bert"]
+    fold: -1 # -1 for all folds, 0-4 for specific fold (5-fold CV)
+    
+dataset:
+    target_project: "KIRC"
+    meta_data_path: "data/OS/tcga_kirc_all.csv"
+    split_path: "splits/OS/tcga_kirc/"
+    image_feat_path: "/project/kimlab_tcga/Data/extracted_features/TRIDENT_processed/TCGA-KIRC/20x_256px_0px_overlap/features_uni_v1_pt"
+    text_feat_path: "data/pathology_report/structured_summary.csv"
+    valid_size: 0.2
+    random_state: 42
+
+hyperparam:
+    max_epochs: 100
+    learning_rate: 1e-5
+
+trainer_param:
+    precision: 16
+    devices: 1
+    accelerator: 'cuda'
+    accumulate_grad_batches: 32
+    num_sanity_val_steps: 0

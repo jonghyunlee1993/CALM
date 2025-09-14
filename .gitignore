@@ -1,0 +1,12 @@
+# ignore all files inside logs and results
+logs/*
+results/*
+
+# BUT keep the placeholder files
+!logs/.gitkeep
+!results/.gitkeep
+
+
+# ignore model weights
+weights
+MUSK
