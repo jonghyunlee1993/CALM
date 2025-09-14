@@ -62,3 +62,38 @@ Using the CLS token, we generated an image-level attention heatmap showing corre
 - **A.** Pathologist-provided tumor annotation. 
 - **B.** Attention heatmap between image and pathology report, with warmer (red) regions corresponding to higher attention weights. 
 - **C.** Representative top-10 highest-attention patches, highlighting regions most aligned with the report.
+
+
+## 🗂️ Prepare Features
+
+We use **TRIDENT** ([https://github.com/mahmoodlab/TRIDENT](https://github.com/mahmoodlab/TRIDENT)) for feature extraction.  
+All experiments were conducted with default parameters unless otherwise specified.
+
+### Example: MUSK feature extraction
+```bash
+python run_batch_of_slides.py \
+    --segmenter grandqc \
+    --task all \
+    --wsi_dir {FOLDER_THAT_CONTAINS_WSI}/TCGA-BLCA \
+    --job_dir {FOLDER_THAT_YOU_WANT_TO_SAVE_FEATURES}/TCGA-BLCA \
+    --patch_encoder musk \
+    --patch_size 384 \
+    --mag 20
+```
+
+### Example: UNI v1 feature extraction
+```bash
+python run_batch_of_slides.py \
+    --segmenter grandqc \
+    --task all \
+    --wsi_dir {FOLDER_THAT_CONTAINS_WSI}/TCGA-BLCA \
+    --job_dir {FOLDER_THAT_YOU_WANT_TO_SAVE_FEATURES}/TCGA-BLCA \
+    --patch_encoder univ1 \
+    --patch_size 256 \
+    --mag 20
+```
+
+### Output format
+
+Extracted features are stored in HDF5 (.h5) files.
+For faster training, we extracted the values under the "features" column from each `.h5` file and saved them as PyTorch `.pt` tensors.
